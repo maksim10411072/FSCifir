@@ -5,9 +5,9 @@ module Format =
         member this.width = width
         member this.height = height
         member this.rawPixels = pixels
-        member this.pixelAt x y = 
+        member this.pixelAt x y =
             try pixels[y][x]
-            with e -> 
+            with e ->
                 printfn "x: %i y: %i" x y
                 reraise()
         end

@@ -4,9 +4,8 @@
 open Game
 open FSCifir
 
-
 [<EntryPoint>]
-let main argv = 
+let main argv =
     use g = new Fscifirgetreal()
 #if DEBUG
     let flnm = "raytest.cif"

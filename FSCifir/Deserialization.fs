@@ -10,10 +10,10 @@ module Deserialization =
     let parsePixelLine (inputString: string): int array =
         inputString.Split(" ")
         |> Array.filter (fun s -> s.Length > 0)
-        |> Array.map (fun hs -> 
+        |> Array.map (fun hs ->
            Int32.Parse(hs.TrimStart('#'), Globalization.NumberStyles.HexNumber))
 
-    let parseCifir (str: string) = 
+    let parseCifir (str: string) =
         let comregex = Text.RegularExpressions.Regex("<--.*-->")
         let lines = (comregex.Replace(str, "")).Split("\n")
         let size = parseHeader lines[0]

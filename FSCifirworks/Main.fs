@@ -9,7 +9,7 @@ module Main =
     [<EntryPoint>]
     let main args =
         match args with
-        | [|"-c"; cifirFile; pngFile|] 
+        | [|"-c"; cifirFile; pngFile|]
             -> printfn "Reading %s..." cifirFile
                use cifir:IO.StreamReader = new IO.StreamReader(cifirFile)
                let ctxt = cifir.ReadToEnd()
@@ -20,7 +20,7 @@ module Main =
                p.SaveAsPng(pngFile)
                printfn "Saved as %s." pngFile
 
-        | [|"-p"; pngFile; cifirFile|] 
+        | [|"-p"; pngFile; cifirFile|]
             -> printfn "Loading %s..." pngFile
                use pimg:Image<Rgb24> = Image.Load<Rgb24>(pngFile)
                printfn "Loading %s. Converting..." pngFile
@@ -37,7 +37,7 @@ module Main =
                let ctxt = cifir.ReadToEnd()
                let pc = Deserialization.parseCifir ctxt
                printfn "%ix%i" pc.width pc.height
-        | args when Array.Exists(args, fun x -> x = "-h" || x = "--help") 
+        | args when Array.Exists(args, fun x -> x = "-h" || x = "--help")
             -> printfn "Usage:\n\t-h | --help\n\t-c <cifirfile> <pngfile>\n\t-p <pngfile> <cifirfile>"
         | _ -> printfn "What? I don't understand you, try running me with -h or --help"
 

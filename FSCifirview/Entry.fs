@@ -9,7 +9,7 @@ open System
 
 type Fscifirgetreal () as x =
     inherit Game()
- 
+
     do x.Content.RootDirectory <- "Content"
     let graphics = new GraphicsDeviceManager(x)
     let mutable spriteBatch = Unchecked.defaultof<SpriteBatch>
@@ -30,7 +30,6 @@ type Fscifirgetreal () as x =
             | _ -> texScale
             , 0.001f
         )
-        
 
     let decomposeRgb (composedRgb: int): int * int * int =
         let r = (composedRgb &&& 0xFF0000) / 0x10000
@@ -50,7 +49,7 @@ type Fscifirgetreal () as x =
             let width = image.width
             let height = image.height
             let texture = new Texture2D(x.GraphicsDevice, width, height, false, SurfaceFormat.Color)
-            let pixels1dized = Array.map (fun col -> 
+            let pixels1dized = Array.map (fun col ->
                 let r, g, b = decomposeRgb col
                 new Color(r, g, b)) (Array.concat image.rawPixels)
             texture.SetData<Color>(pixels1dized, 0, pixels1dized.Length)
@@ -66,7 +65,7 @@ type Fscifirgetreal () as x =
         x.IsMouseVisible <- true
         base.Initialize()
         ()
- 
+
     override this.Update (gameTime) =
         let mouseState = Mouse.GetState()
         if mouseState.LeftButton = ButtonState.Pressed then
@@ -81,8 +80,7 @@ type Fscifirgetreal () as x =
         lastMouse <- mouseState
         texScaleSmoothed <- texScaleSmoothed * 0.9f + texScale * 0.1f
         base.Update(gameTime)
-        
- 
+
     override this.Draw (gameTime) =
         x.GraphicsDevice.Clear color
 
@@ -91,7 +89,7 @@ type Fscifirgetreal () as x =
             spriteBatch.Draw(
                 cifirTex,
                 new Rectangle(
-                    (texPosition + x.Window.ClientBounds.Size.ToVector2() / 2f - texCenter*texScaleSmoothed).ToPoint(), 
+                    (texPosition + x.Window.ClientBounds.Size.ToVector2() / 2f - texCenter*texScaleSmoothed).ToPoint(),
                     (texScaleSmoothed*texSize).ToPoint()
                 ),
                 Color.White)
