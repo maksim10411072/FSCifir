@@ -87,9 +87,9 @@ type Fscifirgetreal () as x =
         x.GraphicsDevice.Clear color
 
         if cifirTex <> null then
-            spriteBatch.Begin()
+            spriteBatch.Begin(samplerState = SamplerState.PointClamp)
             spriteBatch.Draw(
-                cifirTex, 
+                cifirTex,
                 new Rectangle(
                     (texPosition + x.Window.ClientBounds.Size.ToVector2() / 2f - texCenter*texScaleSmoothed).ToPoint(), 
                     (texScaleSmoothed*texSize).ToPoint()
