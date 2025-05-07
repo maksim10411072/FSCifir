@@ -43,8 +43,8 @@ type Fscifirgetreal () as x =
         targetCif <- Some image
 
     override x.Initialize() =
-    
         spriteBatch <- new SpriteBatch(x.GraphicsDevice)
+
         if targetCif.IsSome then
             let image = targetCif.Value
             let width = image.width
@@ -61,23 +61,10 @@ type Fscifirgetreal () as x =
             graphics.PreferredBackBufferWidth <- width
             graphics.ApplyChanges()
             texCenter <- Vector2(float32 width / 2f, float32 height / 2f)
-            //texPosition <- x.Window.ClientBounds.Size.ToVector2() / 2f - texCenter
+
         x.Window.AllowUserResizing <- true
         x.IsMouseVisible <- true
         base.Initialize()
-         
-         // TODO: Add your initialization logic here
-
-        ()
-
-    override this.LoadContent() =
-        
-         // TODO: use x.Content to load your game content here   
-         // On Windows you can load any PNG file directly as Texture2D
-
-         // Read more about MonoGame's Content Pipeline: https://docs.monogame.net/articles/tools/mgcb_editor.html
-         // or install it with package manager console: [dotnet tool install -g dotnet-mgcb-editor]
-        
         ()
  
     override this.Update (gameTime) =
@@ -85,6 +72,7 @@ type Fscifirgetreal () as x =
         if mouseState.LeftButton = ButtonState.Pressed then
             let delta = mouseState.Position - lastMouse.Position
             texPosition <- texPosition + Vector2(float32 delta.X, float32 delta.Y)
+
         texScale <- calcTexScale (lastMouse.ScrollWheelValue - mouseState.ScrollWheelValue, 100f)
 #if DEBUG
         if lastMouse.ScrollWheelValue <> mouseState.ScrollWheelValue then
@@ -96,7 +84,6 @@ type Fscifirgetreal () as x =
         
  
     override this.Draw (gameTime) =
-
         x.GraphicsDevice.Clear color
 
         if cifirTex <> null then
@@ -107,8 +94,7 @@ type Fscifirgetreal () as x =
                     (texPosition + x.Window.ClientBounds.Size.ToVector2() / 2f - texCenter*texScaleSmoothed).ToPoint(), 
                     (texScaleSmoothed*texSize).ToPoint()
                 ),
-                Color.White)// texPosition + x.Window.ClientBounds.Size.ToVector2() / 2f - texCenter, Color.White)
+                Color.White)
             spriteBatch.End()
-        // TODO: Add your drawing code here
 
         ()
